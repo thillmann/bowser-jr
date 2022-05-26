@@ -1,7 +1,7 @@
 {
   "name": "bowser-jr",
   "version": "1.0.0",
-  "description": "Light-weight browser detector",
+  "description": "Light-weight, composable browser detector",
   "author": {
     "name": "Timo Hillmann",
     "email": "timo@hillmann.cc",
@@ -9,12 +9,12 @@
   },
   "license": "MIT",
   "files": [
-    "./browser",
-    "./compat",
-    "./dist",
-    "./engine",
-    "./os",
-    "./platform"
+    "browser",
+    "compat",
+    "dist",
+    "engine",
+    "os",
+    "platform"
   ],
   "main": "./dist/bowser-jr.umd.js",
   "module": "./dist/bowser-jr.es.js",
