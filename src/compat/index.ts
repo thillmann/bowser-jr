@@ -1,1 +1,2 @@
-export * from "./compatParser";
+import BowserCompat from "./compatParser";
+export default BowserCompat;

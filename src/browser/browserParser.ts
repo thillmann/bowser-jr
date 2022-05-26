@@ -24,6 +24,23 @@ export function browserParser(parser: IParser): { browser: Browser } {
   return { browser: result };
 }
 
+export default browserParser;
+
+/**
+ * Get parsed browser object
+ * 
+ * @param   {IParser} parser The parser instance
+ * @returns {Browser}
+ *
+ * @public
+ * @example
+ * const parser = getParser(userAgent, { use: [browserParser] });
+ * getBrowser(parser);
+ * {
+ *  name: 'Firefox',
+ *  version: '26.0'
+ * }
+ */
 export function getBrowser<T extends IParser<{ browser: Browser }>>(parser: T) {
   try {
     return parser.getResult().browser;
@@ -32,6 +49,15 @@ export function getBrowser<T extends IParser<{ browser: Browser }>>(parser: T) {
   }
 }
 
+/**
+ * Get browser's name
+ * 
+ * @param {IParser}   parser The parser instance
+ * @param {boolean}   toLowerCase Flag to transform name to lower case
+ * @returns {String}  Browser's name or an empty string
+ * 
+ * @public
+ */
 export function getBrowserName<T extends IParser<{ browser: Browser }>>(
   parser: T,
   toLowerCase = false
@@ -42,6 +68,14 @@ export function getBrowserName<T extends IParser<{ browser: Browser }>>(
   return getBrowser(parser).name ?? "";
 }
 
+/**
+ * Get browser's version
+ * 
+ * @param   {IParser} parser Parser instance
+ * @returns {String} Browser's version or an empty string
+ * 
+ * @public
+ */
 export function getBrowserVersion<T extends IParser<{ browser: Browser }>>(
   parser: T
 ) {
@@ -50,11 +84,13 @@ export function getBrowserVersion<T extends IParser<{ browser: Browser }>>(
 
 /**
  * Check if the browser name equals the passed string
- * 
+ *
  * @param   {IParser} parser The parser instance
  * @param   {string} browserName The string to compare with the browser name
  * @param   {boolean} [includingAlias=false] The flag showing whether alias will be included into comparison
  * @returns {boolean}
+ * 
+ * @public
  */
 export function isBrowser<T extends IParser<{ browser: Browser }>>(
   parser: T,
@@ -73,10 +109,12 @@ export function isBrowser<T extends IParser<{ browser: Browser }>>(
 
 /**
  * Check if the browser version equals the passed version
- * 
+ *
  * @param   {IParser} parser The parser instance
  * @param   {string} version The version to compare with the browser version
  * @returns {boolean}
+ * 
+ * @public
  */
 export function compareVersion<T extends IParser<{ browser: Browser }>>(
   parser: T,

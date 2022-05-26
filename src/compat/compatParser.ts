@@ -28,7 +28,7 @@ import { IParser } from "../types";
 /**
  * The main class that arranges the whole parsing process.
  */
-class Parser {
+class CompatParser {
   private parser: IParser;
 
   constructor(UA: string, skipParsing = false) {
@@ -188,7 +188,7 @@ class Parser {
 
   /**
    * Parse full information about the browser
-   * @returns {Parser}
+   * @returns {CompatParser}
    */
   parse() {
     this.parseBrowser();
@@ -333,14 +333,14 @@ class Parser {
   }
 }
 
-class Bowser {
+class BowserCompat {
   /**
-   * Creates a {@link Parser} instance
+   * Creates a {@link CompatParser} instance
    *
    * @param {String} UA UserAgent string
    * @param {Boolean} [skipParsing=false] Will make the Parser postpone parsing until you ask it
-   * explicitly. Same as `skipParsing` for {@link Parser}.
-   * @returns {Parser}
+   * explicitly. Same as `skipParsing` for {@link CompatParser}.
+   * @returns {CompatParser}
    * @throws {Error} when UA is not a String
    *
    * @example
@@ -351,11 +351,11 @@ class Bowser {
     if (typeof UA !== "string") {
       throw new Error("UserAgent should be a string");
     }
-    return new Parser(UA, skipParsing);
+    return new CompatParser(UA, skipParsing);
   }
 
   /**
-   * Creates a {@link Parser} instance and runs {@link Parser.getResult} immediately
+   * Creates a {@link CompatParser} instance and runs {@link CompatParser.getResult} immediately
    *
    * @param UA
    * @return {ParsedResult}
@@ -364,7 +364,7 @@ class Bowser {
    * const result = Bowser.parse(window.navigator.userAgent);
    */
   static parse(UA: string) {
-    return new Parser(UA).getResult();
+    return new CompatParser(UA).getResult();
   }
 
   static get BROWSER_MAP() {
@@ -384,4 +384,4 @@ class Bowser {
   }
 }
 
-export default Bowser;
+export default BowserCompat;
