@@ -1,0 +1,29 @@
+name: Deploy App
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/test.yaml"
+      - "src/**"
+      - "test/**"
+
+jobs:
+  test:
+    name: Run Tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@master
+      - uses: pnpm/action-setup@v2.1.0
+        with:
+          version: 7.0.0
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'pnpm'
+      - name: Install dependencies
+        run: pnpm install
+      - name: Run tests
+        run: pnpm run test

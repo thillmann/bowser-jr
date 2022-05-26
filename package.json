@@ -29,7 +29,8 @@
     "generate-types": "tsc --project tsconfig.lib.json",
     "build": "node ./scripts/build.js",
     "lint": "tsc",
-    "test": "vitest"
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "devDependencies": {
     "@types/js-yaml": "4.0.5",
