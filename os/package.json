@@ -1,0 +1,12 @@
+{
+  "name": "bowser-jr-os",
+  "main": "../dist/bowser-jr-os.umd.js",
+  "module": "../dist/bowser-jr-os.es.js",
+  "exports": {
+    ".": {
+      "import": "../dist/bowser-jr-os.es.js",
+      "require": "../dist/bowser-jr-os.umd.js"
+    }
+  },
+  "types": "../dist/os/index.d.ts"
+}

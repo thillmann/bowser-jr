@@ -1,0 +1,15 @@
+export const OS_MAP = {
+  WindowsPhone: "Windows Phone",
+  Windows: "Windows",
+  MacOS: "macOS",
+  iOS: "iOS",
+  Android: "Android",
+  WebOS: "WebOS",
+  BlackBerry: "BlackBerry",
+  Bada: "Bada",
+  Tizen: "Tizen",
+  Linux: "Linux",
+  ChromeOS: "Chrome OS",
+  PlayStation4: "PlayStation 4",
+  Roku: "Roku",
+};

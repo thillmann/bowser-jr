@@ -1,0 +1,22 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "noEmit": false,
+    "emitDeclarationOnly": true,
+    "declaration": true,
+    "lib": ["dom", "esnext", "dom.iterable"],
+    "skipLibCheck": true,
+    "importHelpers": true,
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "baseUrl": "./",
+    "forceConsistentCasingInFileNames": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "downlevelIteration": true
+  },
+  "files": ["./src/index.ts", "./src/browser/index.ts"],
+  "exclude": ["node_modules", "**/*.test.tsx?", "**/*.spec.tsx?"]
+}

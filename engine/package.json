@@ -1,0 +1,12 @@
+{
+  "name": "bowser-jr-engine",
+  "main": "../dist/bowser-jr-engine.umd.js",
+  "module": "../dist/bowser-jr-engine.es.js",
+  "exports": {
+    ".": {
+      "import": "./dist/bowser-jr-engine.es.js",
+      "require": "./dist/bowser-jr-engine.umd.js"
+    }
+  },
+  "types": "../dist/engine/index.d.ts"
+}
