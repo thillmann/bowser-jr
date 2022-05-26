@@ -2,7 +2,7 @@
 
 A small, lightweight and *composable* browser detection utility heavily inspired by [`bowser`](https://github.com/lancedikson/bowser).
 
-[![Run Tests](https://github.com/thillmann/bowser-jr/actions/workflows/test.yaml/badge.svg)](https://github.com/thillmann/bowser-jr/actions/workflows/test.yaml)
+[![Unit Tests](https://github.com/thillmann/bowser-jr/actions/workflows/test.yaml/badge.svg)](https://github.com/thillmann/bowser-jr/actions/workflows/test.yaml)
 
 ## Installation
 
