@@ -27,7 +27,7 @@
   "types": "./dist/index.d.ts",
   "scripts": {
     "generate-types": "tsc --project tsconfig.lib.json",
-    "build": "node ./scripts/build.js",
+    "build": "vite build && pnpm run generate-types",
     "lint": "tsc",
     "test": "vitest run",
     "test:watch": "vitest"

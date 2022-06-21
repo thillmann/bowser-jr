@@ -61,7 +61,7 @@ class Parser<T extends FeatureParser<any>[]> implements IParser {
 
   get<K extends Keys<T>>(key: K): Result<T>[K] {
     if (!this.result || !(key in (this.result as {}))) {
-      throw new Error(`\`${key}\` not found in result`);
+      throw new Error(`\`${String(key)}\` not found in result`);
     }
     return this.result[key];
   }

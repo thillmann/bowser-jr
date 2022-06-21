@@ -25,6 +25,30 @@ export default defineConfig({
       name: "Bowser Jr.",
       fileName: (format) => `bowser-jr.${format}.js`,
     },
+    rollupOptions: {
+      preserveEntrySignatures: "strict",
+      input: {
+        'bowser-jr': resolve(__dirname, 'src/index.ts'),
+        'bowser-jr-compat': resolve(__dirname, 'src/compat/index.ts'),
+        'bowser-jr-browser': resolve(__dirname, 'src/browser/index.ts'),
+        'bowser-jr-engine': resolve(__dirname, 'src/engine/index.ts'),
+        'bowser-jr-os': resolve(__dirname, 'src/os/index.ts'),
+        'bowser-jr-platform': resolve(__dirname, 'src/platform/index.ts'),
+      },
+      output: [
+        {
+          entryFileNames: ({ name }) => `${name}.es.js`,
+          format: 'esm',
+          dir: resolve(__dirname, 'dist')
+        },
+        {
+          entryFileNames: ({ name }) => `${name}.umd.js`,
+          format: 'commonjs',
+          exports: 'named',
+          dir: resolve(__dirname, 'dist')
+        },
+      ]
+    }
   },
   resolve: {
     conditions: ["development", "browser"],

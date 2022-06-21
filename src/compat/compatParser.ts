@@ -320,7 +320,7 @@ class CompatParser {
    * @returns {Boolean}
    */
   is(anything: string, includingAlias = false) {
-    return isAnything(this.parser, anything, isBrowser, isPlatform, isOS);
+    return isAnything(this.parser, anything, (parser, name) => isBrowser(parser, name, includingAlias), isPlatform, isOS);
   }
 
   /**
