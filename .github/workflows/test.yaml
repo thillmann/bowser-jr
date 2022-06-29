@@ -5,8 +5,8 @@ on:
       - main
     paths:
       - ".github/workflows/test.yaml"
-      - "packages/core/src/**"
-      - "packages/core/test/**"
+      - "src/**"
+      - "test/**"
 
 jobs:
   test:

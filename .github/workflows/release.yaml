@@ -1,0 +1,60 @@
+name: Release
+on:
+  push:
+    tags:
+      - '*'
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build library
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@master
+      - uses: pnpm/action-setup@v2.1.0
+        with:
+          version: 7.0.0
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          registry-url: 'https://registry.npmjs.org'
+          cache: 'pnpm'
+      - name: Add .npmrc
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN?}" > .npmrc
+      - name: Install dependencies
+        run: pnpm install
+      - name: Run tests
+        run: cd packages/core && pnpm run test
+      - name: Run build
+        run: cd packages/core && pnpm run build
+      - name: Create package
+        run: |
+          OUTPUT_DIR="${GITHUB_WORKSPACE?}"
+          SANDBOX_DIR=/tmp/sandbox
+          PACKAGE_DIR="${SANDBOX_DIR?}/bowser-jr"
+          rm -rf "${PACKAGE_DIR?}"
+          mkdir -p "${PACKAGE_DIR?}" "${OUTPUT_DIR?}"
+          cp -LR packages/core/. README.md LICENSE "${PACKAGE_DIR?}"
+          rm -rf "${PACKAGE_DIR?}/src"
+          rm -rf "${PACKAGE_DIR?}/test"
+          rm -rf "${PACKAGE_DIR?}/node_modules"
+          rm -rf "${PACKAGE_DIR?}/tsconfig.json"
+          rm -rf "${PACKAGE_DIR?}/tsconfig.lib.json"
+          rm -rf "${PACKAGE_DIR?}/vite.config.ts"
+          cd "${PACKAGE_DIR?}" && zip -r "${OUTPUT_DIR?}/bowser-jr.zip" .
+      - name: Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: cd packages/core && npx semantic-release --dry-run --branches main --tag-format "${version}" --ci
+      - name: Upload release artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: bowser-jr.zip
+          path: |
+            bowser-jr.zip
+
