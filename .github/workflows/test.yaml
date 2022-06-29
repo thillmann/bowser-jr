@@ -5,8 +5,8 @@ on:
       - main
     paths:
       - ".github/workflows/test.yaml"
-      - "src/**"
-      - "test/**"
+      - "packages/core/src/**"
+      - "packages/core/test/**"
 
 jobs:
   test:
@@ -26,4 +26,4 @@ jobs:
       - name: Install dependencies
         run: pnpm install
       - name: Run tests
-        run: pnpm run test
+        run: cd packages/core && pnpm run test
