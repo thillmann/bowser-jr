@@ -1,0 +1,12 @@
+{
+  "name": "bowser-jr-engine",
+  "main": "../dist/cjs/engine.js",
+  "module": "../dist/es/engine.js",
+  "exports": {
+    ".": {
+      "import": "../dist/es/engine.js",
+      "require": "../dist/cjs/engine.js"
+    }
+  },
+  "types": "../dist/engine/index.d.ts"
+}

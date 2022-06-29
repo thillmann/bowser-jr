@@ -28,24 +28,24 @@ export default defineConfig({
     rollupOptions: {
       preserveEntrySignatures: "strict",
       input: {
-        'bowser-jr': resolve(__dirname, 'src/index.ts'),
-        'bowser-jr-compat': resolve(__dirname, 'src/compat/index.ts'),
-        'bowser-jr-browser': resolve(__dirname, 'src/browser/index.ts'),
-        'bowser-jr-engine': resolve(__dirname, 'src/engine/index.ts'),
-        'bowser-jr-os': resolve(__dirname, 'src/os/index.ts'),
-        'bowser-jr-platform': resolve(__dirname, 'src/platform/index.ts'),
+        'bowserjr': resolve(__dirname, 'src/index.ts'),
+        'compat': resolve(__dirname, 'src/compat/index.ts'),
+        'browser': resolve(__dirname, 'src/browser/index.ts'),
+        'engine': resolve(__dirname, 'src/engine/index.ts'),
+        'os': resolve(__dirname, 'src/os/index.ts'),
+        'platform': resolve(__dirname, 'src/platform/index.ts'),
       },
       output: [
         {
-          entryFileNames: ({ name }) => `${name}.es.js`,
+          entryFileNames: ({ name }) => `${name}.js`,
           format: 'esm',
-          dir: resolve(__dirname, 'dist')
+          dir: resolve(__dirname, 'dist/es')
         },
         {
-          entryFileNames: ({ name }) => `${name}.umd.js`,
+          entryFileNames: ({ name }) => `${name}.js`,
           format: 'commonjs',
           exports: 'named',
-          dir: resolve(__dirname, 'dist')
+          dir: resolve(__dirname, 'dist/cjs')
         },
       ]
     }

@@ -1,0 +1,12 @@
+{
+  "name": "bowser-jr-os",
+  "main": "../dist/cjs/os.js",
+  "module": "../dist/es/os.js",
+  "exports": {
+    ".": {
+      "import": "../dist/es/os.js",
+      "require": "../dist/cjs/os.js"
+    }
+  },
+  "types": "../dist/os/index.d.ts"
+}

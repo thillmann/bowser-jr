@@ -1,0 +1,12 @@
+{
+  "name": "bowser-jr-platform",
+  "main": "../dist/cjs/platform.js",
+  "module": "../dist/es/platform.js",
+  "exports": {
+    ".": {
+      "import": "../dist/es/platform.js",
+      "require": "../dist/cjs/platform.js"
+    }
+  },
+  "types": "../dist/platform/index.d.ts"
+}

@@ -1,0 +1,12 @@
+{
+  "name": "bowser-jr-compat",
+  "main": "../dist/cjs/compat.js",
+  "module": "../dist/es/compat.js",
+  "exports": {
+    ".": {
+      "import": "../dist/es/compat.js",
+      "require": "../dist/cjs/compat.js"
+    }
+  },
+  "types": "../dist/compat/index.d.ts"
+}

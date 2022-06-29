@@ -1,0 +1,12 @@
+{
+  "name": "bowser-jr-browser",
+  "main": "../dist/cjs/browser.js",
+  "module": "../dist/es/browser.js",
+  "exports": {
+    ".": {
+      "import": "../dist/es/browser.js",
+      "require": "../dist/cjs/browser.js"
+    }
+  },
+  "types": "../dist/browser/index.d.ts"
+}
