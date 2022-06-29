@@ -2,6 +2,10 @@
   "name": "bowser-jr",
   "version": "1.0.2",
   "description": "Light-weight, composable browser detector",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/thillmann/bowser-jr.git"
+  },
   "author": {
     "name": "Timo Hillmann",
     "email": "timo@hillmann.cc",
