@@ -1,6 +1,6 @@
 {
   "name": "bowser-jr",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Light-weight, composable browser detector",
   "repository": {
     "type": "git",
