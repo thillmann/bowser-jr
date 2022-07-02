@@ -24,6 +24,6 @@ rm -rf "${PACKAGE_DIR?}/vite.config.ts"
 
 OUTPUT="${OUTPUT_DIR?}/bowser-jr-${VERSION?}.zip"
 
-cd "${PACKAGE_DIR?}" && zip -r "${OUTPUT?}" .
+cd "${PACKAGE_DIR?}" && zip -rq "${OUTPUT?}" .
 
 echo "${OUTPUT?}"
