@@ -3,7 +3,6 @@ on:
   push:
     tags:
       - '*'
-  workflow_dispatch:
 
 jobs:
   build:
@@ -32,29 +31,34 @@ jobs:
         run: cd packages/core && pnpm run test
       - name: Run build
         run: cd packages/core && pnpm run build
+      - name: Get version
+        run: |
+          echo "::set-output name=version::$(cat packages/core/package.json | grep version | awk -F: '{ print $2 }' | sed 's/[", ]//g')"
+        id: version
       - name: Create package
         run: |
-          OUTPUT_DIR="${GITHUB_WORKSPACE?}"
-          SANDBOX_DIR=/tmp/sandbox
-          PACKAGE_DIR="${SANDBOX_DIR?}/bowser-jr"
-          rm -rf "${PACKAGE_DIR?}"
-          mkdir -p "${PACKAGE_DIR?}" "${OUTPUT_DIR?}"
-          cp -LR packages/core/. README.md LICENSE "${PACKAGE_DIR?}"
-          rm -rf "${PACKAGE_DIR?}/src"
-          rm -rf "${PACKAGE_DIR?}/test"
-          rm -rf "${PACKAGE_DIR?}/node_modules"
-          rm -rf "${PACKAGE_DIR?}/tsconfig.json"
-          rm -rf "${PACKAGE_DIR?}/tsconfig.lib.json"
-          rm -rf "${PACKAGE_DIR?}/vite.config.ts"
-          cd "${PACKAGE_DIR?}" && zip -r "${OUTPUT_DIR?}/bowser-jr.zip" .
-      - name: Release
+          echo "::set-output name=package::$(./scripts/create-package.sh ${GITHUB_WORKSPACE} ${{ steps.version.outputs.version }})"
+        id: package
+      - name: Create changelog
+        run: cd packages/core && pnpm run generate-changelog
+      - name: release
+        uses: actions/create-release@v1
+        id: create_release
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: cd packages/core && npx semantic-release --dry-run --branches main --tag-format "${version}" --ci
-      - name: Upload release artifacts
-        uses: actions/upload-artifact@v3
+          GITHUB_TOKEN: ${{ github.token }}
         with:
-          name: bowser-jr.zip
-          path: |
-            bowser-jr.zip
+          draft: false
+          prerelease: false
+          release_name: ${{ steps.version.outputs.version }}
+          tag_name: ${{ github.ref }}
+          body_path: packages/core/CHANGELOG.md
+      - name: upload linux artifact
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ${{ steps.package.outputs.package }}
+          asset_name: bowser-jr-${{ steps.version.outputs.version }}.zip
+          asset_content_type: application/gzip
 
