@@ -52,9 +52,9 @@ console.log(parser.getResult());
 `bowser-jr` also comes with a compatibility utility for [`bowser`](https://github.com/lancedikson/bowser) to make adoption a little easier:
 
 ```ts
-import Bowser from 'bowser-jr/compat';
+import BowserCompat from 'bowser-jr/compat';
 
-const browser = Bowser.getParser(window.navigator.userAgent);
+const browser = BowserCompat.getParser(window.navigator.userAgent);
 console.log(browser.getBrowser());
 
 // outputs
@@ -63,4 +63,3 @@ console.log(browser.getBrowser());
   version: "11.0"
 }
 ```
-
